@@ -9,27 +9,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6F73EE8E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "src\WebApi\WebApi.csproj", "{17777310-98AA-4EB9-B31E-C7995107578D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi.IntegrationTests", "tests\WebApi.IntegrationTests\WebApi.IntegrationTests.csproj", "{F8F34631-70D8-4959-ABD2-64252AD831E5}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\Application\Application.csproj", "{9D976D76-F119-4FFA-BFE1-10A50D1D3A2D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\Domain\Domain.csproj", "{FEF82635-8C95-4800-AD40-65174D1C1F63}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "src\Infrastructure\Infrastructure.csproj", "{07A359E2-10CA-43E7-870C-2A70EA1D08BE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.UnitTests", "tests\Application.UnitTests\Application.UnitTests.csproj", "{B4C538ED-CCB9-4972-AAAE-07DC15A20F55}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.UnitTests", "tests\Infrastructure.UnitTests\Infrastructure.UnitTests.csproj", "{EA47E288-1DAE-448D-81B8-472F9D12B527}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{AB260D86-BA33-4101-988D-7455AFB765CA}"
 	ProjectSection(SolutionItems) = preProject
+		docker-compose.yaml = docker-compose.yaml
 		Jenkinsfile = Jenkinsfile
 		project.json = project.json
 		README.md = README.md
-		docker-compose.yaml = docker-compose.yaml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library", "src\Library\Library.csproj", "{BDC4B585-275C-4641-B174-000353281575}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.UnitTests", "tests\Infrastructure.UnitTests\Infrastructure.UnitTests.csproj", "{4402A1C0-8CE6-4A66-A05E-30F731C6A96B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi.IntegrationTests", "tests\WebApi.IntegrationTests\WebApi.IntegrationTests.csproj", "{643BA7A2-5A8A-4256-9320-CDAB3CAD9F40}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.UnitTests", "tests\Application.UnitTests\Application.UnitTests.csproj", "{81F545E9-A08C-41E4-AE7E-F45AD18CB742}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,22 +51,18 @@ Global
 		{07A359E2-10CA-43E7-870C-2A70EA1D08BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07A359E2-10CA-43E7-870C-2A70EA1D08BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07A359E2-10CA-43E7-870C-2A70EA1D08BE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B4C538ED-CCB9-4972-AAAE-07DC15A20F55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B4C538ED-CCB9-4972-AAAE-07DC15A20F55}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B4C538ED-CCB9-4972-AAAE-07DC15A20F55}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B4C538ED-CCB9-4972-AAAE-07DC15A20F55}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F8F34631-70D8-4959-ABD2-64252AD831E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F8F34631-70D8-4959-ABD2-64252AD831E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F8F34631-70D8-4959-ABD2-64252AD831E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F8F34631-70D8-4959-ABD2-64252AD831E5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EA47E288-1DAE-448D-81B8-472F9D12B527}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EA47E288-1DAE-448D-81B8-472F9D12B527}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EA47E288-1DAE-448D-81B8-472F9D12B527}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EA47E288-1DAE-448D-81B8-472F9D12B527}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BDC4B585-275C-4641-B174-000353281575}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BDC4B585-275C-4641-B174-000353281575}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BDC4B585-275C-4641-B174-000353281575}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BDC4B585-275C-4641-B174-000353281575}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4402A1C0-8CE6-4A66-A05E-30F731C6A96B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4402A1C0-8CE6-4A66-A05E-30F731C6A96B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4402A1C0-8CE6-4A66-A05E-30F731C6A96B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4402A1C0-8CE6-4A66-A05E-30F731C6A96B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{643BA7A2-5A8A-4256-9320-CDAB3CAD9F40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{643BA7A2-5A8A-4256-9320-CDAB3CAD9F40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{643BA7A2-5A8A-4256-9320-CDAB3CAD9F40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{643BA7A2-5A8A-4256-9320-CDAB3CAD9F40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81F545E9-A08C-41E4-AE7E-F45AD18CB742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81F545E9-A08C-41E4-AE7E-F45AD18CB742}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81F545E9-A08C-41E4-AE7E-F45AD18CB742}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81F545E9-A08C-41E4-AE7E-F45AD18CB742}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,10 +72,9 @@ Global
 		{9D976D76-F119-4FFA-BFE1-10A50D1D3A2D} = {01DB6AF7-1AF5-42B2-9C10-590FBB6E98D0}
 		{FEF82635-8C95-4800-AD40-65174D1C1F63} = {01DB6AF7-1AF5-42B2-9C10-590FBB6E98D0}
 		{07A359E2-10CA-43E7-870C-2A70EA1D08BE} = {01DB6AF7-1AF5-42B2-9C10-590FBB6E98D0}
-		{B4C538ED-CCB9-4972-AAAE-07DC15A20F55} = {6F73EE8E-79E2-4318-AFC3-07430D675434}
-		{F8F34631-70D8-4959-ABD2-64252AD831E5} = {6F73EE8E-79E2-4318-AFC3-07430D675434}
-		{EA47E288-1DAE-448D-81B8-472F9D12B527} = {6F73EE8E-79E2-4318-AFC3-07430D675434}
-		{BDC4B585-275C-4641-B174-000353281575} = {01DB6AF7-1AF5-42B2-9C10-590FBB6E98D0}
+		{4402A1C0-8CE6-4A66-A05E-30F731C6A96B} = {6F73EE8E-79E2-4318-AFC3-07430D675434}
+		{643BA7A2-5A8A-4256-9320-CDAB3CAD9F40} = {6F73EE8E-79E2-4318-AFC3-07430D675434}
+		{81F545E9-A08C-41E4-AE7E-F45AD18CB742} = {6F73EE8E-79E2-4318-AFC3-07430D675434}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5AD3328A-7F40-4E4B-AC64-2F89A488A3A5}
