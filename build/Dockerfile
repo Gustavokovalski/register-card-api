@@ -5,14 +5,17 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0
 
 WORKDIR /app
 
+# Copy csproj and restore as distinct layers
+COPY RegisterCard.sln ./
+
 COPY src/Application/Application.csproj ./src/Application/
 COPY src/Domain/Domain.csproj ./src/Domain/
 COPY src/Infrastructure/Infrastructure.csproj ./src/Infrastructure/
 COPY src/WebApi/WebApi.csproj ./src/WebApi/
 
-#COPY tests/Application.UnitTests/Application.UnitTests.csproj /app/tests/Application.UnitTests/
-#COPY tests/Infrastructure.UnitTests/Infrastructure.UnitTests.csproj /app/tests/Infrastructure.UnitTests/
-#COPY tests/WebApi.IntegrationTests/WebApi.IntegrationTests.csproj /app/tests/WebApi.IntegrationTests/
+COPY tests/Application.UnitTests/Application.UnitTests.csproj ./tests/Application.UnitTests/
+COPY tests/Infrastructure.UnitTests/Infrastructure.UnitTests.csproj ./tests/Infrastructure.UnitTests/
+COPY tests/WebApi.IntegrationTests/WebApi.IntegrationTests.csproj ./tests/WebApi.IntegrationTests/
 
 # Restore dependencies
 RUN dotnet restore
