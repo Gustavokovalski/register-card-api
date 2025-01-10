@@ -8,7 +8,6 @@ WORKDIR /app
 # Copy csproj and restore as distinct layers
 COPY RegisterCard.sln ./
 
-COPY RegisterCard.sln ./
 COPY src/Application/Application.csproj ./src/Application/
 COPY src/Domain/Domain.csproj ./src/Domain/
 COPY src/Infrastructure/Infrastructure.csproj ./src/Infrastructure/
