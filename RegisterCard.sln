@@ -17,6 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "src\Infra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{AB260D86-BA33-4101-988D-7455AFB765CA}"
 	ProjectSection(SolutionItems) = preProject
+		cloudbuild.yaml = cloudbuild.yaml
 		docker-compose.yaml = docker-compose.yaml
 		Jenkinsfile = Jenkinsfile
 		project.json = project.json
