@@ -5,6 +5,9 @@ using System.Reflection;
 using System.Diagnostics;
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
+using RegisterCard.Application.Common.Interfaces;
+using RegisterCard.Application.Services;
+using RegisterCard.Application.Common.Factories;
 namespace RegisterCard.Application;
 
 public static class DependencyInjection
@@ -17,6 +20,11 @@ public static class DependencyInjection
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
         services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
         services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
+
+        services.AddScoped<TokenGeneratorFactory>();
+        services.AddScoped<ITokenGeneratorService, TokenGeneratorService>();
+        services.AddScoped<ITokenGenerator, Md5TokenGenerator>();
+        services.AddScoped<ITokenGenerator, RotatedTokenGenerator>();
 
         return services;
     }
