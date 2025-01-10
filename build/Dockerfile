@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0
 
 # Copying nuget config generated from Jenkins
-COPY nuget.config /app/
+#COPY nuget.config /app/
 
 # Copy csproj and restore as distinct layers
 COPY RegisterCards.sln /app/
