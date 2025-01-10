@@ -23,6 +23,8 @@ RUN dotnet restore
 # Copy the rest of the source code
 COPY . .
 
+#CMD ["dotnet", "run", "--project", "src/WebApi/WebApi.csproj"]
+
 # Build the application
 WORKDIR /app/src/WebApi
 RUN dotnet build -c Release -o /app/build
