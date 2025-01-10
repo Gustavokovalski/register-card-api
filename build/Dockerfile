@@ -4,7 +4,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0
 #COPY nuget.config /app/
 
 # Copy csproj and restore as distinct layers
-COPY RegisterCards.sln /app/
+COPY RegisterCard.sln /app/
 
 COPY src/Application/Application.csproj /app/src/Application/
 COPY src/Domain/Domain.csproj /app/src/Domain/
