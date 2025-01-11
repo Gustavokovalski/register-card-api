@@ -30,6 +30,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi.IntegrationTests", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.UnitTests", "tests\Application.UnitTests\Application.UnitTests.csproj", "{81F545E9-A08C-41E4-AE7E-F45AD18CB742}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{454D4D3E-8B7F-4F4C-922D-8BAACE0AF60A}"
+	ProjectSection(SolutionItems) = preProject
+		build\Dockerfile = build\Dockerfile
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
