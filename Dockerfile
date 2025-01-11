@@ -23,6 +23,8 @@ FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "/src/RegisterCard.sln" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
+ENV ASPNETCORE_URLS=http://+:8080
+
 # Final stage
 FROM base AS final
 WORKDIR /app
