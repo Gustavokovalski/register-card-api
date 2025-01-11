@@ -1,39 +1,29 @@
-# Base image for runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+USER app
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 8080
+EXPOSE 8081
 
-# Build image
+# Build stage
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /app
-# Copy solution file
-COPY RegisterCard.sln /app
+ARG BUILD_CONFIGURATION=Release
+WORKDIR /src
 
-#WORKDIR /src
-# Copy project files and restore dependencies
-COPY src/Application/Application.csproj ./src/Application/
-COPY src/Domain/Domain.csproj ./src/Domain/
-COPY src/Infrastructure/Infrastructure.csproj ./src/Infrastructure/
-COPY src/WebApi/WebApi.csproj ./src/WebApi/
-COPY tests/Application.UnitTests/Application.UnitTests.csproj ./tests/Application.UnitTests/
-COPY tests/Infrastructure.UnitTests/Infrastructure.UnitTests.csproj ./tests/Infrastructure.UnitTests/
-COPY tests/WebApi.IntegrationTests/WebApi.IntegrationTests.csproj ./tests/WebApi.IntegrationTests/
+# Copy the full ContactsIntegrator directory, including all the projects and the solution file
+COPY ["./", "/src"]
 
-RUN dotnet restore
+# Restore the solution
+RUN dotnet restore "/src/RegisterCard.sln"
 
-# Copy the rest of the source code
-COPY . .
+# Build the solution
+RUN dotnet build "/src/RegisterCard.sln" -c $BUILD_CONFIGURATION -o /app/build
 
-# Build the project
-#WORKDIR /src
-RUN dotnet build "src/WebApi/WebApi.csproj" -c Release -o /app/build
-
-# Publish the application
+# Publish stage
 FROM build AS publish
-RUN dotnet publish "src/WebApi/WebApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "/src/RegisterCard.sln" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-# Runtime image
+# Final stage
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
