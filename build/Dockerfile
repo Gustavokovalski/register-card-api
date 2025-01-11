@@ -37,6 +37,8 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
+RUN echo "Conteúdo do diretório /src:" && ls -al /src
+
 COPY ["./Application.csproj", "."]
 RUN dotnet restore "./Application.csproj"
 COPY . .
