@@ -13,7 +13,7 @@ WORKDIR /src
 COPY ["./", "/src"]
 
 # Restore the solution
-RUN dotnet restore "RegisterCard.sln"
+RUN dotnet restore "/src/RegisterCard.sln"
 
 # Build the solution
 RUN dotnet build "/src/RegisterCard.sln" -c $BUILD_CONFIGURATION -o /app/build
