@@ -10,7 +10,7 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
 # Copy the full files directory, including all the projects and the solution file
-COPY ../ /src/
+COPY ./ /src/
 
 # Restore the solution
 RUN dotnet restore "/src/RegisterCard.sln"
