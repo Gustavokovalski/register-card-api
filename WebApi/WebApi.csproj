@@ -6,10 +6,11 @@
     <AssemblyName>RegisterCard.WebApi</AssemblyName>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <DockerfileContext>.</DockerfileContext>
+    <!--<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>-->
   </PropertyGroup>
 
   <ItemGroup>
-    <!--<PackageReference Include="ME.AspNet.Extensions.WebApi.Csharp" Version="3.10.0" />-->
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.0" />
