@@ -10,7 +10,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 # Copy solution file
 COPY RegisterCard.sln ./
 
-WORKDIR /src
+#WORKDIR /src
 # Copy project files and restore dependencies
 COPY src/Application/Application.csproj ./src/Application/
 COPY src/Domain/Domain.csproj ./src/Domain/
@@ -26,7 +26,7 @@ RUN dotnet restore
 COPY . .
 
 # Build the project
-WORKDIR /src
+#WORKDIR /src
 RUN dotnet build "src/WebApi/WebApi.csproj" -c Release -o /app/build
 
 # Publish the application
