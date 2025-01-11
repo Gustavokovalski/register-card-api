@@ -13,15 +13,15 @@ WORKDIR /src
 COPY ["./", "/src"]
 
 # Restore the solution
-RUN dotnet restore "/src/RegisterCard.sln"
+RUN dotnet restore "RegisterCard.sln"
 
 # Build the solution
-RUN dotnet build "/src/RegisterCard.sln" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "RegisterCard.sln" -c $BUILD_CONFIGURATION -o /app/build
 
 # Publish stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "/src/RegisterCard.sln" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "RegisterCard.sln" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # Final stage
 FROM base AS final
