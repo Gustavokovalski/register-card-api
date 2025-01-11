@@ -4,9 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using RegisterCard.Application.UseCases.Cards.Commands.RegisterCard;
 using RegisterCard.Application.UseCases.Cards.Queries.GetUserById;
 
-namespace RegisterCard.WebApi.Controllers.v1;
+namespace RegisterCard.WebApi.Controllers;
 
-[ApiVersion("1.0")]
 [Route("cards")]
 public class CardController : ControllerBase
 {
@@ -18,7 +17,7 @@ public class CardController : ControllerBase
     }
 
     /// <summary>
-    /// Create a user
+    /// Register a card
     /// </summary>
     /// <remarks>
     /// Creates a new user in the database.
