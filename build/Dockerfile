@@ -6,11 +6,11 @@ EXPOSE 443
 
 # Build image
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /src
 
 # Copy solution file
 COPY RegisterCard.sln ./
 
+WORKDIR /src
 # Copy project files and restore dependencies
 COPY src/Application/Application.csproj ./src/Application/
 COPY src/Domain/Domain.csproj ./src/Domain/
