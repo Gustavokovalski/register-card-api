@@ -27,6 +27,7 @@ RUN dotnet publish "/src/RegisterCard.sln" -c $BUILD_CONFIGURATION -o /app/publi
 
 # Final stage
 FROM base AS final
+ENV ASPNETCORE_URLS=http://*:${PORT}
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "RegisterCard.WebApi.dll"]

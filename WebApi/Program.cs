@@ -2,8 +2,16 @@ using Microsoft.EntityFrameworkCore;
 using RegisterCard.Application;
 using RegisterCard.Infrastructure;
 using RegisterCard.Infrastructure.Context;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Configure Kestrel to listen on a specific port from the environment variable
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.Listen(IPAddress.Any, int.Parse(port)); // Listen on all network interfaces
+});
 
 //TODO - jogar para infra
 builder.Services.AddDbContext<CardDbContext>(options =>
@@ -32,10 +40,6 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 //}
-
-
-var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-app.Urls.Add($"http://*:{port}");
 
 app.UseHttpsRedirection();
 
