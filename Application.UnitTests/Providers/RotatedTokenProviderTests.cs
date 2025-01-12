@@ -65,4 +65,34 @@ public class RotatedTokenProviderTests
         // Assert
         token.Should().NotBeEmpty();
     }
+
+    [Test]
+    [TestCase(null)]
+    [TestCase("")]
+    public void GenerateToken_Should_Throw_Exception_When_CardNumber_Is_Null(string cardNumber)
+    {
+        // Arrange
+        string cvv = "123";
+
+        // Act
+        Action act = () => _tokenProvider.GenerateToken(cardNumber, cvv);
+
+        // Assert
+        act.Should().Throw<ArgumentException>().WithMessage("Card number is required");
+    }
+
+    [Test]
+    [TestCase(null)]
+    [TestCase("")]
+    public void GenerateToken_Should_Throw_Exception_When_Cvv_Is_Null(string cvv)
+    {
+        // Arrange
+        string cardNumber = "1234567812345678";
+
+        // Act
+        Action act = () => _tokenProvider.GenerateToken(cardNumber, cvv);
+
+        // Assert
+        act.Should().Throw<ArgumentException>().WithMessage("CVV is required");
+    }
 }

@@ -13,6 +13,12 @@ public class RotatedTokenProvider : ITokenGenerator
     /// <returns></returns>
     public Guid GenerateToken(string cardNumber, string cvv)
     {
+        if (string.IsNullOrEmpty(cardNumber))
+            throw new ArgumentException("Card number is required");
+
+        if (string.IsNullOrEmpty(cvv))
+            throw new ArgumentException("CVV is required");
+
         var last4Digits = cardNumber[^4..];
         var rotations = int.Parse(cvv);
 
@@ -24,7 +30,6 @@ public class RotatedTokenProvider : ITokenGenerator
 
         return token;
     }
-
 
     /// <summary>
     /// 

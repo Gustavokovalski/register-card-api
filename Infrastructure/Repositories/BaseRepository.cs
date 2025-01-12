@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RegisterCard.Application.Common.Exceptions;
 using RegisterCard.Application.Common.Repositories;
 using RegisterCard.Infrastructure.Context;
 
@@ -9,7 +10,7 @@ public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : clas
     protected readonly CardDbContext _context;
     public BaseRepository(CardDbContext context)
     {
-        _context = context;
+        _context = context.ThrowIfNull();
     }
     public async Task AddAsync(TEntity entity, CancellationToken cancellationToken = default)
     {

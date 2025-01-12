@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using RegisterCard.Application.Common.Exceptions;
 
 namespace RegisterCard.WebApi.Extensions.Middlewares;
 
@@ -9,7 +10,7 @@ public class GlobalExceptionHandler : IExceptionHandler
 
     public GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger)
     {
-        _logger = logger;
+        _logger = logger.ThrowIfNull();
     }
 
     public async ValueTask<bool> TryHandleAsync(

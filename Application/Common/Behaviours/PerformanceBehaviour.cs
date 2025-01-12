@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
+using RegisterCard.Application.Common.Exceptions;
 using System.Diagnostics;
 using System.Text.Json;
 
@@ -12,7 +13,7 @@ public class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequ
     public PerformanceBehaviour(ILogger<TRequest> logger)
     {
         _timer = new Stopwatch();
-        _logger = logger;
+        _logger = logger.ThrowIfNull();
     }
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)

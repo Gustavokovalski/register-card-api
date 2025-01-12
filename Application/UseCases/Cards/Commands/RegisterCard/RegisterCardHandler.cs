@@ -25,14 +25,17 @@ public class RegisterCardHandler : IRequestHandler<RegisterCardCommand, Register
 
     public async Task<RegisterCardResponse> Handle(RegisterCardCommand request, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("Card processing started for CustomerId:{customerId}", request.CustomerId);
+
         var token = _tokenProviderService.GenerateToken(new CardInfo(request.CardNumber!, request.Cvv!, request.ProviderType));
-        _logger.LogInformation("Successfully generated token");
+
+        _logger.LogInformation("Successfully generated token for CustomerId:{customerId}", request.CustomerId);
 
         var card = new Card { CustomerId = request.CustomerId, TokenDate = DateTime.Now };
         card.SetToken(token);
 
         await _repository.AddAsync(card, cancellationToken);
-        _logger.LogInformation("Card:{0} Token was saved successfully", card.Id);
+        _logger.LogInformation("Card:{0} for CustomerId:{1} Token was saved successfully", card.Id, request.CustomerId);
         return new RegisterCardResponse(card.Token!.ToString());
     }
 }

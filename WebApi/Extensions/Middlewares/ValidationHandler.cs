@@ -1,4 +1,5 @@
 ﻿using RegisterCard.Application.Common.Exception;
+using RegisterCard.Application.Common.Exceptions;
 using RegisterCard.Application.Common.Models;
 using System.Text.Json;
 
@@ -11,8 +12,8 @@ public class ValidationHandler
 
     public ValidationHandler(RequestDelegate next, ILogger<ValidationHandler> logger)
     {
-        _next = next;
-        _logger = logger;
+        _next = next.ThrowIfNull();
+        _logger = logger.ThrowIfNull();
     }
 
     public async Task Invoke(HttpContext context)

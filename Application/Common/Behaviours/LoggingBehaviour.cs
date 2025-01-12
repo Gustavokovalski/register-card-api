@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
-using System.Text.Json;
+using RegisterCard.Application.Common.Exceptions;
 
 namespace RegisterCard.Application.Common.Behaviours;
 public class LoggingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
@@ -9,14 +9,14 @@ public class LoggingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest,
 
     public LoggingBehaviour(ILogger<LoggingBehaviour<TRequest, TResponse>> logger)
     {
-        _logger = logger;
+        _logger = logger.ThrowIfNull();
     }
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("RegisterCard API Handling: { name } {@request }", typeof(TRequest).Name, JsonSerializer.Serialize(request));
+        _logger.LogInformation("RegisterCard API Handling: { name }", typeof(TRequest).Name);
         var response = await next();
-        _logger.LogInformation("RegisterCard API Response Handling: { name } {@response }", typeof(TResponse).Name, JsonSerializer.Serialize(response));
+        _logger.LogInformation("RegisterCard API Response Handling: { name }", typeof(TResponse).Name);
 
         return response;
     }

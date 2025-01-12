@@ -2,6 +2,7 @@
 using System.Net.Mime;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using RegisterCard.Application.Common.Exceptions;
 using RegisterCard.Application.UseCases.Cards.Commands.RegisterCard;
 using RegisterCard.Application.UseCases.Cards.Queries.GetUserById;
 
@@ -14,7 +15,7 @@ public class CardController : ControllerBase
 
     public CardController(IMediator mediator)
     {
-        _mediator = mediator;
+        _mediator = mediator.ThrowIfNull();
     }
 
     /// <summary>

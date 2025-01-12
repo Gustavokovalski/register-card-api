@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using RegisterCard.Application.Common.Interfaces;
@@ -14,14 +15,24 @@ public class ProviderServiceTests
     private Mock<ITokenProviderFactory> _mockFactory;
     private Mock<ITokenGenerator> _mockGenerator;
     private ProviderService _providerService;
+    private Mock<ILogger<ProviderService>> _logger = new();
 
     [SetUp]
     public void SetUp()
     {
         _mockFactory = new Mock<ITokenProviderFactory>();
         _mockGenerator = new Mock<ITokenGenerator>();
+        _providerService = new ProviderService(_mockFactory.Object, _logger.Object);
+    }
 
-        _providerService = new ProviderService(_mockFactory.Object);
+    [Test]
+    public void Constructor_NullTokenProviderService_ThrowsArgumentNullException()
+    {
+        // Act
+        Action act = () => new ProviderService(null, _logger.Object);
+
+        // Assert
+        act.Should().Throw<ArgumentNullException>();
     }
 
     [TestCase(TokenProviderType.ProviderA)]

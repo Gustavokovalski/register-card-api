@@ -2,6 +2,7 @@
 using MediatR;
 using RegisterCard.Application.Common.Bases;
 using RegisterCard.Application.Common.Exception;
+using RegisterCard.Application.Common.Exceptions;
 
 namespace RegisterCard.Application.Common.Behaviours;
 
@@ -11,7 +12,7 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
 
     public ValidationBehaviour(IEnumerable<IValidator<TRequest>> validators)
     {
-        _validators = validators;
+        _validators = validators.ThrowIfNull();
     }
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
