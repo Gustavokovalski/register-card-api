@@ -5,11 +5,11 @@ using RegisterCard.Application.Common.Exception;
 
 namespace RegisterCard.Application.Common.Behaviours;
 
-public class ValidationBehaviourHandler<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
+public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 
-    public ValidationBehaviourHandler(IEnumerable<IValidator<TRequest>> validators)
+    public ValidationBehaviour(IEnumerable<IValidator<TRequest>> validators)
     {
         _validators = validators;
     }

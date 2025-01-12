@@ -16,9 +16,9 @@ public static class DependencyInjection
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
-        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviourHandler<,>));
-        services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviourHandler<,>));
-        services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviourHandler<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+        services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>));
+        services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
 
         services.AddScoped<ITokenProviderFactory, TokenProviderFactory>();
         services.AddScoped<ITokenProviderService, ProviderService>();

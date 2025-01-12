@@ -4,12 +4,12 @@ using System.Diagnostics;
 using System.Text.Json;
 
 namespace RegisterCard.Application.Common.Behaviours;
-public class PerformanceBehaviourHandler<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
+public class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {
     private readonly Stopwatch _timer;
     private readonly ILogger<TRequest> _logger;
 
-    public PerformanceBehaviourHandler(ILogger<TRequest> logger)
+    public PerformanceBehaviour(ILogger<TRequest> logger)
     {
         _timer = new Stopwatch();
         _logger = logger;

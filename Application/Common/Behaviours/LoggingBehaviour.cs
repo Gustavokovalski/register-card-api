@@ -3,11 +3,11 @@ using Microsoft.Extensions.Logging;
 using System.Text.Json;
 
 namespace RegisterCard.Application.Common.Behaviours;
-public class LoggingBehaviourHandler<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
+public class LoggingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {
-    private readonly ILogger<LoggingBehaviourHandler<TRequest, TResponse>> _logger;
+    private readonly ILogger<LoggingBehaviour<TRequest, TResponse>> _logger;
 
-    public LoggingBehaviourHandler(ILogger<LoggingBehaviourHandler<TRequest, TResponse>> logger)
+    public LoggingBehaviour(ILogger<LoggingBehaviour<TRequest, TResponse>> logger)
     {
         _logger = logger;
     }
