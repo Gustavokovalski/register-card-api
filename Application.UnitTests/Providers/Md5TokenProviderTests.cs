@@ -6,14 +6,7 @@ namespace RegisterCard.Application.UnitTests.Providers;
 
 public class Md5TokenProviderTests
 {
-    private Md5TokenProvider _tokenProvider;
-
-    [SetUp]
-    public void SetUp()
-    {
-        _tokenProvider = new Md5TokenProvider();
-    }
-
+    private Md5TokenProvider _tokenProvider = new();
 
     [Test]
     [TestCase("4152314618768876")]

@@ -7,13 +7,7 @@ namespace RegisterCard.Application.UnitTests.Providers;
 [TestFixture]
 public class RotatedTokenProviderTests
 {
-    private RotatedTokenProvider _tokenProvider;
-
-    [SetUp]
-    public void SetUp()
-    {
-        _tokenProvider = new RotatedTokenProvider();
-    }
+    private RotatedTokenProvider _tokenProvider = new();
 
     [Test]
     public void GenerateToken_Should_Generate_Token_When_Rotation_Is_0()
