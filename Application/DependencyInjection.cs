@@ -23,7 +23,7 @@ public static class DependencyInjection
         services.AddScoped<ITokenProviderFactory, TokenProviderFactory>();
         services.AddScoped<ITokenProviderService, ProviderService>();
         services.AddScoped<ITokenGenerator, Md5TokenProvider>();
-        services.AddScoped<ITokenGenerator, RotatedTokenProvider>();
+        services.AddScoped<ITokenGenerator, Providers.RotatedTokenProvider>();
 
         return services;
     }

@@ -1,29 +1,48 @@
-﻿using Moq;
+﻿using FluentAssertions;
+using Moq;
 using NUnit.Framework;
 using RegisterCard.Application.Common.Interfaces;
 using RegisterCard.Application.Services;
+using RegisterCard.Domain.Common;
 using RegisterCard.Domain.Enums;
 
 namespace RegisterCard.Application.UnitTests.Services;
 public class ProviderServiceTests
 {
-    private readonly Mock<ITokenProviderFactory> _mockFactory = new();
+    private Mock<ITokenProviderFactory> _mockFactory;
+    private Mock<ITokenGenerator> _mockGenerator;
     private ProviderService _providerService;
 
-    public ProviderServiceTests()
+    [SetUp]
+    public void SetUp()
     {
+        _mockFactory = new Mock<ITokenProviderFactory>();
+        _mockGenerator = new Mock<ITokenGenerator>();
+
         _providerService = new ProviderService(_mockFactory.Object);
     }
 
     [TestCase(TokenProviderType.ProviderA)]
     [TestCase(TokenProviderType.ProviderB)]
-    public void GenerateToken_ShouldCallFactoryCreateMethod(TokenProviderType providerType)
+    public void GenerateToken_Should_Call_FactoryCreateMethod(TokenProviderType providerType)
     {
         // Arrange
-        var mockGenerator = new Mock<ITokenGenerator>();
-        _mockFactory.Setup(f => f.Create(It.IsAny<TokenProviderType?>())).Returns(mockGenerator.Object);
+        var cardInfo = new CardInfo("1234567812345678", "123", providerType);
 
-        // Act & Assert
-        Assert.DoesNotThrow(() => _providerService.GenerateToken(new Domain.Common.CardInfo("4729 3536 71738", "1123", providerType)));
+        _mockFactory
+            .Setup(f => f.Create(cardInfo.ProviderType))
+            .Returns(_mockGenerator.Object);
+
+        _mockGenerator.
+            Setup(g => g.GenerateToken(cardInfo.CardNumber, cardInfo.Cvv))
+            .Returns(Guid.NewGuid());
+
+        // Act
+        var token = _providerService.GenerateToken(cardInfo);
+
+        // Assert
+        token.Should().NotBeEmpty();
+        _mockFactory.Verify(f => f.Create(cardInfo.ProviderType), Times.Once);
+        _mockGenerator.Verify(g => g.GenerateToken(cardInfo.CardNumber, cardInfo.Cvv), Times.Once);
     }
 }

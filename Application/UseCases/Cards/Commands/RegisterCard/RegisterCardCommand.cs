@@ -14,5 +14,5 @@ public class RegisterCardCommand : IRequest<RegisterCardResponse>
 
     [JsonRequired]
     public string? Cvv { get; init; }
-    public TokenProviderType ProviderType { get; init; }
+    public TokenProviderType? ProviderType { get; init; }
 }
