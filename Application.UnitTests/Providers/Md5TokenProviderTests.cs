@@ -4,6 +4,7 @@ using RegisterCard.Application.Providers;
 
 namespace RegisterCard.Application.UnitTests.Providers;
 
+[TestFixture]
 public class Md5TokenProviderTests
 {
     private Md5TokenProvider _tokenProvider = new();

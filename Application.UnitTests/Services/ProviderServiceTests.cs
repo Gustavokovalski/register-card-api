@@ -7,6 +7,8 @@ using RegisterCard.Domain.Common;
 using RegisterCard.Domain.Enums;
 
 namespace RegisterCard.Application.UnitTests.Services;
+
+[TestFixture]
 public class ProviderServiceTests
 {
     private Mock<ITokenProviderFactory> _mockFactory;

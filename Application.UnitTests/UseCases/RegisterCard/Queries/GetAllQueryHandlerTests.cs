@@ -7,6 +7,8 @@ using RegisterCard.Application.UseCases.Cards.Queries.GetUserById;
 using RegisterCard.Domain.Aggregates.UserAggregate;
 
 namespace RegisterCard.Application.UnitTests.UseCases.RegisterCard.Queries;
+
+[TestFixture]
 public class GetAllQueryHandlerTests
 {
     private Mock<ICardRepository> _repository;

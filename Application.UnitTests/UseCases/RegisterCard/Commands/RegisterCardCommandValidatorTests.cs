@@ -5,6 +5,7 @@ using RegisterCard.Application.UseCases.Cards.Commands.RegisterCard;
 
 namespace RegisterCard.Application.UnitTests.UseCases.RegisterCard.Commands;
 
+[TestFixture]
 public class RegisterCardCommandValidatorTests
 {
     private RegisterCardCommandValidator _validator;

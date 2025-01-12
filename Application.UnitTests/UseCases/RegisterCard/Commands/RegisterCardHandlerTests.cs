@@ -9,6 +9,7 @@ using RegisterCard.Domain.Common;
 
 namespace RegisterCard.Application.UnitTests.UseCases.RegisterCard.Commands;
 
+[TestFixture]
 public class RegisterCardHandlerTests
 {
     private Mock<ITokenProviderService> _tokenProviderService;
