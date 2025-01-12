@@ -10,7 +10,7 @@ public class CardDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseInMemoryDatabase("Cards");
+        optionsBuilder.UseInMemoryDatabase("CardDatabase");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

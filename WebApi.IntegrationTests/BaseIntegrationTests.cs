@@ -14,15 +14,15 @@ public abstract class BaseIntegrationTests
 {
     protected HttpClient? ApplicationClient { get; private set; }
 
-    [OneTimeSetUp]
-    public void Setup()
-    {
-        ApplicationClient = new WebApplicationFactory<Program>().WithWebHostBuilder(builder =>
-        {
-            builder.ConfigureTestServices(services =>
-            {
-                services.AddSingleton<IPolicyEvaluator, MockPolicyEvaluator>();
-            });
-        }).CreateClient();
-    }
+    //[OneTimeSetUp]
+    //public void Setup()
+    //{
+    //    ApplicationClient = new WebApplicationFactory<Program>().WithWebHostBuilder(builder =>
+    //    {
+    //        builder.ConfigureTestServices(services =>
+    //        {
+    //            services.AddSingleton<IPolicyEvaluator, MockPolicyEvaluator>();
+    //        });
+    //    }).CreateClient();
+    //}
 }

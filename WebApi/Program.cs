@@ -2,6 +2,7 @@ using RegisterCard.Application;
 using RegisterCard.Infrastructure;
 using RegisterCard.WebApi.Extensions.Middlewares;
 using System.Net;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +15,12 @@ builder.Services.RegisterApplicationExternalDependencies();
 builder.Services.AddHttpContextAccessor();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+});
 
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
@@ -29,6 +35,9 @@ if (!builder.Environment.IsDevelopment())
     });
 }
 
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 var app = builder.Build();
 
 
@@ -37,7 +46,7 @@ app.UseSwaggerUI();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 
-app.UseMiddleware<ValidationMiddleware>();
+app.UseMiddleware<ValidationHandler>();
 
 app.MapControllers();
 

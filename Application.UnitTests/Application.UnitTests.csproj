@@ -9,6 +9,12 @@
         <IsPackable>false</IsPackable>
     </PropertyGroup>
 
+    <!--<ItemGroup>
+      <Compile Remove="UseCases\**" />
+      <EmbeddedResource Remove="UseCases\**" />
+      <None Remove="UseCases\**" />
+    </ItemGroup>-->
+
     <ItemGroup>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
         <PackageReference Include="NUnit" Version="4.0.1" />
@@ -24,11 +30,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Application\Application.csproj" />
+        <ProjectReference Include="..\Application\Application.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="UseCases\" />
+      <Folder Include="Common\" />
     </ItemGroup>
 
 </Project>
