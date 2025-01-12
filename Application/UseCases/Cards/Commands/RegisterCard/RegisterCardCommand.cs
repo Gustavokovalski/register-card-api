@@ -10,9 +10,9 @@ public class RegisterCardCommand : IRequest<RegisterCardResponse>
     public int CustomerId { get; set; }
 
     [JsonRequired]
-    public string? CardNumber { get; set; }
+    public string? CardNumber { get; init; }
 
     [JsonRequired]
-    public string? Cvv { get; set; }
-    public TokenProviderType ProviderType { get; set; }
+    public string? Cvv { get; init; }
+    public TokenProviderType ProviderType { get; init; }
 }

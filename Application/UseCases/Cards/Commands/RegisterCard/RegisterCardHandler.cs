@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using RegisterCard.Application.Common.Exceptions;
 using RegisterCard.Application.Common.Interfaces;
 using RegisterCard.Application.Common.Repositories;
 using RegisterCard.Domain.Aggregates.UserAggregate;
@@ -14,8 +15,8 @@ public class RegisterCardHandler : IRequestHandler<RegisterCardCommand, Register
         ITokenProviderService tokenProviderService,
         ICardRepository repository)
     {
-        _tokenProviderService = tokenProviderService;
-        _repository = repository;
+        _tokenProviderService = tokenProviderService.ThrowIfNull();
+        _repository = repository.ThrowIfNull();
     }
 
     public async Task<RegisterCardResponse> Handle(RegisterCardCommand request, CancellationToken cancellationToken)

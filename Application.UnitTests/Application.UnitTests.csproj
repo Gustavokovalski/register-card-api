@@ -4,7 +4,7 @@
         <TargetFramework>net8.0</TargetFramework>
         <RootNamespace>RegisterCard.Application.UnitTests</RootNamespace>
         <AssemblyName>RegisterCard.Application.UnitTests</AssemblyName>
-        <Nullable>enable</Nullable>
+        <!--<Nullable>enable</Nullable>-->
         <ImplicitUsings>enable</ImplicitUsings>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
@@ -35,6 +35,7 @@
 
     <ItemGroup>
       <Folder Include="Common\" />
+      <Folder Include="UseCases\RegisterCard\Queries\" />
     </ItemGroup>
 
 </Project>
