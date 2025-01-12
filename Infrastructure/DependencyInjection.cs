@@ -11,7 +11,6 @@ public static class DependencyInjection
     public static IServiceCollection RegisterApplicationExternalDependencies(
         this IServiceCollection services)
     {
-        //services.AddMEOpenTelemetry(configuration);
         services.AddDbContext<CardDbContext>(
             options => options.UseInMemoryDatabase("CardDatabase"));
 

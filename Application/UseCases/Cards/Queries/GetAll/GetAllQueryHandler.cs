@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using RegisterCard.Application.Common.Exceptions;
 using RegisterCard.Application.Common.Repositories;
 
 namespace RegisterCard.Application.UseCases.Cards.Queries.GetUserById;
@@ -9,7 +10,7 @@ public class GetAllQueryHandler : IRequestHandler<GetAllQuery, IEnumerable<GetAl
 
     public GetAllQueryHandler(ICardRepository repository)
     {
-        _repository = repository;
+        _repository = repository.ThrowIfNull();
     }
 
     public async Task<IEnumerable<GetAllResponse>> Handle(GetAllQuery request, CancellationToken cancellationToken)

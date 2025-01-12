@@ -4,12 +4,14 @@
         <TargetFramework>net8.0</TargetFramework>
         <RootNamespace>RegisterCard.Application.UnitTests</RootNamespace>
         <AssemblyName>RegisterCard.Application.UnitTests</AssemblyName>
-        <Nullable>enable</Nullable>
+        <!--<Nullable>enable</Nullable>-->
         <ImplicitUsings>enable</ImplicitUsings>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
 
+
     <ItemGroup>
+        <PackageReference Include="AutoFixture" Version="4.18.1" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
         <PackageReference Include="NUnit" Version="4.0.1" />
         <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
@@ -24,11 +26,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Application\Application.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="UseCases\" />
+        <ProjectReference Include="..\Application\Application.csproj" />
     </ItemGroup>
 
 </Project>

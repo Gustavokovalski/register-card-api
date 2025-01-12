@@ -1,4 +1,5 @@
-﻿using System.Net.Mime;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Net.Mime;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using RegisterCard.Application.UseCases.Cards.Commands.RegisterCard;
@@ -20,14 +21,14 @@ public class CardController : ControllerBase
     /// Register a card
     /// </summary>
     /// <remarks>
-    /// Creates a new user in the database.
+    /// registers a card token in the database.
     /// </remarks>
     [HttpPost("register")]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(RegisterCardResponse))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Register(
-        [FromHeader(Name = "CustomerId")] int customerId,
+        [FromHeader(Name = "CustomerId"), Required] int customerId,
         [FromBody] RegisterCardCommand command,
         CancellationToken cancellationToken)
     {

@@ -1,36 +1,38 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Logging;
+using RegisterCard.Application.Common.Exceptions;
 using RegisterCard.Application.Common.Interfaces;
 using RegisterCard.Application.Common.Repositories;
 using RegisterCard.Domain.Aggregates.UserAggregate;
+using RegisterCard.Domain.Common;
 
 namespace RegisterCard.Application.UseCases.Cards.Commands.RegisterCard;
 public class RegisterCardHandler : IRequestHandler<RegisterCardCommand, RegisterCardResponse>
 {
-    private readonly ITokenGeneratorService _tokenGeneratorService;
+    private readonly ITokenProviderService _tokenProviderService;
     private readonly ICardRepository _repository;
+    private ILogger<RegisterCardHandler> _logger;
 
-    public RegisterCardHandler(ITokenGeneratorService tokenGeneratorService, ICardRepository repository)
+    public RegisterCardHandler(
+        ITokenProviderService tokenProviderService,
+        ICardRepository repository,
+        ILogger<RegisterCardHandler> logger)
     {
-        _tokenGeneratorService = tokenGeneratorService;
-        _repository = repository;
+        _tokenProviderService = tokenProviderService.ThrowIfNull();
+        _repository = repository.ThrowIfNull();
+        _logger = logger.ThrowIfNull();
     }
 
     public async Task<RegisterCardResponse> Handle(RegisterCardCommand request, CancellationToken cancellationToken)
     {
-        var token = _tokenGeneratorService.GenerateToken(request.Provider!, request.CardNumber!, request.Cvv!);
-        //var res = await _tokenGeneratorService.Send(new CreateTokenCommand
-        //{
-        //    CardNumber = request.CardNumber!,
-        //    Cvv = request.Cvv!,
-        //    Provider = request.Provider!
-        //});
+        var token = _tokenProviderService.GenerateToken(new CardInfo(request.CardNumber!, request.Cvv!, request.ProviderType));
+        _logger.LogInformation("Successfully generated token");
 
         var card = new Card { CustomerId = request.CustomerId, TokenDate = DateTime.Now };
         card.SetToken(token);
+
         await _repository.AddAsync(card, cancellationToken);
-
-        var tst = await _repository.GetAllAsync(cancellationToken);
-
+        _logger.LogInformation("Card:{0} Token was saved successfully", card.Id);
         return new RegisterCardResponse(card.Token!.ToString());
     }
 }

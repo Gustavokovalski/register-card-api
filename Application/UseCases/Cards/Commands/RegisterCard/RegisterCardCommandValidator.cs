@@ -2,11 +2,11 @@
 
 namespace RegisterCard.Application.UseCases.Cards.Commands.RegisterCard;
 
-public class RegisterCardCommandValidator : AbstractValidator<RegisterCardCommand>
+public sealed class RegisterCardCommandValidator : AbstractValidator<RegisterCardCommand>
 {
     private const string RequiredMessage = "{PropertyName} is required.";
-    private const string InvalidCardFormatMessage = "Invalid card number format.";
-    private const string InvalidCvvFormatMessage = "CVV must be exactly 4 digits.";
+    private const string InvalidCardFormatMessage = "Invalid card number.";
+    private const string InvalidCvvFormatMessage = "Cvv must contain 3 or 4 digits.";
 
     public RegisterCardCommandValidator()
     {
@@ -17,9 +17,7 @@ public class RegisterCardCommandValidator : AbstractValidator<RegisterCardComman
             .WithMessage(RequiredMessage);
 
         RuleFor(p => p.CardNumber)
-            .NotNull()
-            .NotEmpty()
-            .WithMessage(RequiredMessage)
+            .NotNull().NotEmpty().WithMessage(RequiredMessage)
             .CreditCard()
             .WithMessage(InvalidCardFormatMessage);
 
@@ -27,7 +25,7 @@ public class RegisterCardCommandValidator : AbstractValidator<RegisterCardComman
             .NotNull()
             .NotEmpty()
             .WithMessage(RequiredMessage)
-            .Matches(@"^\d{4}$")
+            .Matches(@"^\d{3,4}$")
             .WithMessage(InvalidCvvFormatMessage);
     }
 }
