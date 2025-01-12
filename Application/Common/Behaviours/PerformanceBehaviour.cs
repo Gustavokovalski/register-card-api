@@ -2,9 +2,12 @@
 using Microsoft.Extensions.Logging;
 using RegisterCard.Application.Common.Exceptions;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 
 namespace RegisterCard.Application.Common.Behaviours;
+
+[ExcludeFromCodeCoverage]
 public class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {
     private readonly Stopwatch _timer;

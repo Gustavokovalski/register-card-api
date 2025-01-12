@@ -1,4 +1,8 @@
-﻿namespace RegisterCard.Application.Common.Exceptions;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace RegisterCard.Application.Common.Exceptions;
+
+[ExcludeFromCodeCoverage]
 public static class ThrowIfNullException
 {
     public static T ThrowIfNull<T>(this T argument)

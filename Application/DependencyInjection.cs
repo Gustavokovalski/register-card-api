@@ -7,8 +7,10 @@ using RegisterCard.Application.Services;
 using RegisterCard.Application.Common.Factories;
 using RegisterCard.Application.Providers;
 using RegisterCard.Application.Common.Behaviours;
+using System.Diagnostics.CodeAnalysis;
 namespace RegisterCard.Application;
 
+[ExcludeFromCodeCoverage]
 public static class DependencyInjection
 {
     public static IServiceCollection RegisterApplicationUseCases(this IServiceCollection services)

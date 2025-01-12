@@ -1,6 +1,9 @@
 ﻿using RegisterCard.Application.Common.Bases;
+using System.Diagnostics.CodeAnalysis;
 
 namespace RegisterCard.Application.Common.Exception;
+
+[ExcludeFromCodeCoverage]
 public class ValidationExceptionCustom : System.Exception
 {
     public IEnumerable<BaseError> Errors { get; }

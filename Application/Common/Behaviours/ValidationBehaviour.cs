@@ -3,9 +3,11 @@ using MediatR;
 using RegisterCard.Application.Common.Bases;
 using RegisterCard.Application.Common.Exception;
 using RegisterCard.Application.Common.Exceptions;
+using System.Diagnostics.CodeAnalysis;
 
 namespace RegisterCard.Application.Common.Behaviours;
 
+[ExcludeFromCodeCoverage]
 public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;

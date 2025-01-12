@@ -1,8 +1,11 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
 using RegisterCard.Application.Common.Exceptions;
+using System.Diagnostics.CodeAnalysis;
 
 namespace RegisterCard.Application.Common.Behaviours;
+
+[ExcludeFromCodeCoverage]
 public class LoggingBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {
     private readonly ILogger<LoggingBehaviour<TRequest, TResponse>> _logger;
