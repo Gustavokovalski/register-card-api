@@ -17,8 +17,7 @@ public class RegisterCardCommandValidatorTests
 
     [Test]
     [TestCase(0)]
-    [TestCase(-1)]
-    public void Should_Have_Error_When_CustomerId_Is_LessThanOrEqualToZero(int customerId)
+    public void Should_Have_Error_When_CustomerId_Is_EqualToZero(int customerId)
     {
         // Arrange
         var command = new RegisterCardCommand { CustomerId = customerId, CardNumber = "4298903509494686", Cvv = "853" };
@@ -26,7 +25,20 @@ public class RegisterCardCommandValidatorTests
         // Act & Assert
         var result = _validator.TestValidate(command);
         result.ShouldHaveValidationErrorFor(request => request.CustomerId);
-        result.Errors.Should().Contain(e => e.ErrorMessage.Equals("Customer Id' must not be empty."));
+        result.Errors.Should().Contain(e => e.ErrorMessage.Equals("'Customer Id' must not be empty."));
+        result.Errors.Should().Contain(e => e.ErrorMessage.Equals("Customer Id is required."));
+    }
+
+    [Test]
+    [TestCase(-1)]
+    public void Should_Have_Error_When_CustomerId_Is_LessThanZero(int customerId)
+    {
+        // Arrange
+        var command = new RegisterCardCommand { CustomerId = customerId, CardNumber = "4298903509494686", Cvv = "853" };
+
+        // Act & Assert
+        var result = _validator.TestValidate(command);
+        result.ShouldHaveValidationErrorFor(request => request.CustomerId);
         result.Errors.Should().Contain(e => e.ErrorMessage.Equals("Customer Id is required."));
     }
 
@@ -40,7 +52,8 @@ public class RegisterCardCommandValidatorTests
         // Act & Assert
         var result = _validator.TestValidate(command);
         result.ShouldHaveValidationErrorFor(request => request.CardNumber);
-        result.Errors.Should().Contain(e => e.ErrorMessage.Equals("Card Number is required."));;
+        result.Errors.Should().Contain(e => e.ErrorMessage.Equals("Card Number is required."));
+        result.Errors.Should().Contain(e => e.ErrorMessage.Equals("'Card Number' must not be empty."));
     }
 
     [Test]
@@ -55,7 +68,6 @@ public class RegisterCardCommandValidatorTests
         var result = _validator.TestValidate(command);
         result.ShouldHaveValidationErrorFor(request => request.CardNumber);
         result.Errors.Should().Contain(e => e.ErrorMessage.Equals("Card Number is required."));
-        result.Errors.Should().Contain(e => e.ErrorMessage.Equals("Card Number' must not be empty."));
     }
 
     [Test]

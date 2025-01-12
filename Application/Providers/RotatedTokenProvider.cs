@@ -3,10 +3,10 @@ using System.Text;
 using RegisterCard.Application.Common.Interfaces;
 
 namespace RegisterCard.Application.Providers;
-internal class RotatedTokenProvider : ITokenGenerator
+public class RotatedTokenProvider : ITokenGenerator
 {
     /// <summary>
-    ///  gera um token a partir de uma rotação dos últimos 4 dígitos do cartão
+    /// Generates a token from a rotation from the last 4 digits of a card
     /// </summary>
     /// <param name="cardNumber"></param>
     /// <param name="cvv"></param>
@@ -25,21 +25,15 @@ internal class RotatedTokenProvider : ITokenGenerator
         return token;
     }
 
-    //private int[] RotateArray(int[] array, int rotations)
-    //{
-    //    rotations %= array.Length;
-    //    return array[^rotations..].Concat(array[..^rotations]).ToArray();
-    //}
 
     /// <summary>
-    /// Função para rotacionar o array
+    /// 
     /// </summary>
     /// <param name="array"></param>
     /// <param name="rotations"></param>
     /// <returns></returns>
     private int[] RotateArray(int[] array, int rotations)
     {
-        // Garante que o número de rotações seja dentro do limite do tamanho do array
         rotations = rotations % array.Length;
 
         if (rotations == 0)
@@ -49,7 +43,7 @@ internal class RotatedTokenProvider : ITokenGenerator
 
         for (int i = 0; i < array.Length; i++)
         {
-            int newIndex = (i + rotations) % array.Length;  // Calcula o novo índice
+            int newIndex = (i + rotations) % array.Length;
             rotatedArray[newIndex] = array[i];
         }
 
@@ -57,7 +51,7 @@ internal class RotatedTokenProvider : ITokenGenerator
     }
 
     /// <summary>
-    /// Gerar um GUID determinístico a partir de uma string
+    /// Generates a deterministic guid from a string
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
@@ -67,7 +61,7 @@ internal class RotatedTokenProvider : ITokenGenerator
         {
             var hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(input));
 
-            // pega os primeiros 16 bytes do SHA256 para gerar um Guid (16 bytes)
+            //takes the first 16 bytes of SHA256 to generate a Guid (16 bytes)
             return hashBytes.Take(16).ToArray();
         }
     }

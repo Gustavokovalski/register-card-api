@@ -24,7 +24,7 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
-builder.Logging.SetMinimumLevel(LogLevel.Debug);
+builder.Logging.SetMinimumLevel(LogLevel.Information);
 
 if (!builder.Environment.IsDevelopment())
 {

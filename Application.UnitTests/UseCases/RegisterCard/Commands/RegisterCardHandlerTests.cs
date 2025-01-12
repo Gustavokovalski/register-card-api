@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 using RegisterCard.Application.Common.Interfaces;
@@ -13,20 +14,24 @@ public class RegisterCardHandlerTests
     private Mock<ITokenProviderService> _tokenProviderService;
     private Mock<ICardRepository> _repository;
     private RegisterCardHandler _handler;
+    private Mock<ILogger<RegisterCardHandler>> _logger = new();
 
     [SetUp]
     public void SetUp()
     {
         _tokenProviderService = new Mock<ITokenProviderService>();
         _repository = new Mock<ICardRepository>();
-        _handler = new RegisterCardHandler(_tokenProviderService.Object, _repository.Object);
+        _handler = new RegisterCardHandler(
+            _tokenProviderService.Object,
+            _repository.Object,
+            _logger.Object);
     }
 
     [Test]
     public void Constructor_NullTokenProviderService_ThrowsArgumentNullException()
     {
         // Act
-        Action act = () => new RegisterCardHandler(null, _repository.Object);
+        Action act = () => new RegisterCardHandler(null, _repository.Object, _logger.Object);
 
         // Assert
         act.Should().Throw<ArgumentNullException>();
@@ -36,7 +41,7 @@ public class RegisterCardHandlerTests
     public void Constructor_NullCardRepository_ThrowsArgumentNullException()
     {
         // Act
-        Action act = () => new RegisterCardHandler(_tokenProviderService.Object, null);
+        Action act = () => new RegisterCardHandler(_tokenProviderService.Object, null, _logger.Object);
 
         // Assert
         act.Should().Throw<ArgumentNullException>();
