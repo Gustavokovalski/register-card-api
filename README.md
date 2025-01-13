@@ -48,7 +48,9 @@ access the api on the port https://localhost:7147/swagger/index.html
 
 ![image](https://github.com/user-attachments/assets/a9c0f9f4-9c54-4643-9b33-0278ff055e03)
 
-access the api on the port [https://localhost:7147/swagger/index.html](http://localhost:8080/swagger/index.html)
+access the api on the port http://localhost:8080/swagger/index.html
+
+
 
 
 
