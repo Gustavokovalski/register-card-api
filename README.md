@@ -35,7 +35,7 @@ access the api on the port https://localhost:7147/swagger/index.html
 **or for test the application using Docker, in the project root folder, type the command below and press enter:**
 
 ```powershell
-> docker build -t register-card:latest
+> docker build -t register-card:latest .
 ```
 
 ```powershell
