@@ -43,18 +43,19 @@ public class CardController : ControllerBase
     }
 
     /// <summary>
-    /// List all cards
+    /// Get all cards by customer ID.
     /// </summary>
+    /// <param name="customerId">The ID of the customer</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     [HttpGet]
     [Consumes(MediaTypeNames.Application.Json)]
-    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BaseResponse<GetAllResponse>))]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BaseResponse<GetAllByCustomerIdResponse>))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(BaseResponse<object>))]
-    public async Task<IActionResult> Get(CancellationToken cancellationToken)
+    public async Task<IActionResult> GetAll([FromHeader(Name = "CustomerId"), Required] int customerId, CancellationToken cancellationToken)
     {
-        var cards = await _mediator.Send(new GetAllQuery(), cancellationToken);
+        var cards = await _mediator.Send(new GetAllByCustomerIdQuery(customerId), cancellationToken);
         return Ok(cards);
     }
 }

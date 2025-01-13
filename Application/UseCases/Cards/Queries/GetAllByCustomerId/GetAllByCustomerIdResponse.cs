@@ -1,3 +1,3 @@
 ﻿namespace RegisterCard.Application.UseCases.Cards.Queries.GetUserById;
 
-public record GetAllResponse(Guid CardId, Guid Token);
+public record GetAllByCustomerIdResponse(Guid CardId, Guid Token);

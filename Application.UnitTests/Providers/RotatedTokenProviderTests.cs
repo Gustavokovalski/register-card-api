@@ -57,6 +57,8 @@ public class RotatedTokenProviderTests
     [Test]
     [TestCase("4075109055589999", "351")]
     [TestCase("47947339518989", "1267")]
+    [TestCase("4075109055581234", "351")]
+    [TestCase("47947339511234", "3")]
     public void GenerateToken_Should_Handle_Cvv(string cardNumber, string cvv)
     {
         // Act

@@ -9,23 +9,23 @@ using RegisterCard.Domain.Aggregates.UserAggregate;
 namespace RegisterCard.Application.UnitTests.UseCases.RegisterCard.Queries;
 
 [TestFixture]
-public class GetAllQueryHandlerTests
+public class GetAllByCustomerIdQueryHandlerTests
 {
     private Mock<ICardRepository> _repository;
-    private GetAllQueryHandler _handler;
+    private GetAllByCustomerIdQueryHandler _handler;
 
     [SetUp]
     public void SetUp()
     {
         _repository = new Mock<ICardRepository>();
-        _handler = new GetAllQueryHandler(_repository.Object);
+        _handler = new GetAllByCustomerIdQueryHandler(_repository.Object);
     }
 
     [Test]
     public void Constructor_NullCardRepository_ThrowsArgumentNullException()
     {
         // Act
-        Action act = () => new GetAllQueryHandler(null);
+        Action act = () => new GetAllByCustomerIdQueryHandler(null);
 
         // Assert
         act.Should().Throw<ArgumentNullException>();
@@ -40,17 +40,17 @@ public class GetAllQueryHandlerTests
 
         var cards = new List<Card> { card1, card2 };
 
-        _repository.Setup(r => r.GetAllAsync(It.IsAny<CancellationToken>())).ReturnsAsync(cards);
+        _repository.Setup(r => r.FindAsync(card1.CustomerId, It.IsAny<CancellationToken>())).ReturnsAsync(cards);
 
         var cancellationToken = CancellationToken.None;
 
         // Act
-        var result = await _handler.Handle(new GetAllQuery(), cancellationToken);
+        var result = await _handler.Handle(new GetAllByCustomerIdQuery(card1.CustomerId), cancellationToken);
 
         // Assert
         result
             .Should()
-            .BeEquivalentTo(cards.Select(card => new GetAllResponse(card.Id, card.Token)));
+            .BeEquivalentTo(cards.Select(card => new GetAllByCustomerIdResponse(card.Id, card.Token)));
     }
 
     [Test]
@@ -58,11 +58,13 @@ public class GetAllQueryHandlerTests
     {
         // Arrange
         var cards = new List<Card>();
-        _repository.Setup(r => r.GetAllAsync(It.IsAny<CancellationToken>())).ReturnsAsync(cards);
+        var customerId = cards.Select(x => x.CustomerId).FirstOrDefault();
+
+        _repository.Setup(r => r.FindAsync(customerId, It.IsAny<CancellationToken>())).ReturnsAsync(cards);
         var cancellationToken = CancellationToken.None;
 
         // Act
-        var result = await _handler.Handle(new GetAllQuery(), cancellationToken);
+        var result = await _handler.Handle(new GetAllByCustomerIdQuery(customerId), cancellationToken);
 
         // Assert
         result.Should().BeEmpty();
@@ -73,16 +75,17 @@ public class GetAllQueryHandlerTests
     {
         // Arrange
         var cards = new List<Card> { new Fixture().Create<Card>() };
+        var customerId = cards.Select(x => x.CustomerId).FirstOrDefault();
 
-        _repository.Setup(r => r.GetAllAsync(It.IsAny<CancellationToken>())).ReturnsAsync(cards);
+        _repository.Setup(r => r.FindAsync(customerId, It.IsAny<CancellationToken>())).ReturnsAsync(cards);
 
-        var query = new GetAllQuery();
+        var query = new GetAllByCustomerIdQuery(customerId);
         var cancellationToken = CancellationToken.None;
 
         // Act
         await _handler.Handle(query, cancellationToken);
 
         // Assert
-        _repository.Verify(r => r.GetAllAsync(It.IsAny<CancellationToken>()), Times.Once);
+        _repository.Verify(r => r.FindAsync(customerId, It.IsAny<CancellationToken>()), Times.Once);
     }
 }
