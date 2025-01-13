@@ -10,10 +10,13 @@ This is a .NET 8 API project designed with Clean Architecture principles, implem
 
 
 ## How to test the application
-You can access a published API and test directly through swagger
+
+There are 3 options for testing
+
+**You can access a published API and test directly through swagger**
 [Published App in GCP (Google Cloud Plataform)](https://register-card-api-784529591133.us-central1.run.app/swagger/index.html) 
 
-**To __test__ the application, in the project root folder, enter the command below and press enter:**
+**or in the project root folder, enter the command below and press enter:**
 
 - **Run project (cmd)**
 
@@ -28,4 +31,24 @@ access the api on the port https://localhost:7147/swagger/index.html
 ```powershell
 > dotnet test .\RegisterCard.sln
 ```
+
+**or for test the application using Docker, in the project root folder, type the command below and press enter:**
+
+```powershell
+> docker build -t register-card:latest
+```
+
+```powershell
+>  docker run -d -p 8080:8080 --name register-card register-card:latest .
+```
+
+```powershell
+>  docker logs register-card
+```
+
+![image](https://github.com/user-attachments/assets/a9c0f9f4-9c54-4643-9b33-0278ff055e03)
+
+access the api on the port [https://localhost:7147/swagger/index.html](http://localhost:8080/swagger/index.html)
+
+
 
