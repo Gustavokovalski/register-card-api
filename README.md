@@ -6,7 +6,7 @@ This is a .NET 8 API project designed with Clean Architecture principles, implem
 
 - **100% Code Coverage**
 ![Private picture]![image](https://github.com/user-attachments/assets/7f42b3f7-4bce-4eea-817a-9ee4f59cb25c)
-![Private picture]![image](https://github.com/user-attachments/assets/bf75f05d-d435-4660-8e22-decb0ddff98a)
+![image](https://github.com/user-attachments/assets/bf75f05d-d435-4660-8e22-decb0ddff98a)
 
 
 ## How to test the application
