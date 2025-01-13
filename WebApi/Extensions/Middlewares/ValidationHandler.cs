@@ -26,9 +26,22 @@ public class ValidationHandler
         }
         catch (ValidationExceptionCustom ex)
         {
+
             _logger.LogError(ex, "Validation error occurred for request: {Method} {Path}", context.Request.Method, context.Request.Path);
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
             context.Response.ContentType = "application/json";
-            await JsonSerializer.SerializeAsync(context.Response.Body, new BaseResponse<object> { Message = "Validation Errors", Errors = ex.Errors });
+
+            var response = new BaseResponse<object>
+            {
+                Success = false,
+                Message = "Validation Errors",
+                Errors = ex.Errors
+            };
+
+            await JsonSerializer.SerializeAsync(context.Response.Body, response, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
         }
     }
 }

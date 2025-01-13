@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using RegisterCard.Domain.Enums;
 
 namespace RegisterCard.Application.UseCases.Cards.Commands.RegisterCard;
 
@@ -27,5 +28,10 @@ public sealed class RegisterCardCommandValidator : AbstractValidator<RegisterCar
             .WithMessage(RequiredMessage)
             .Matches(@"^\d{3,4}$")
             .WithMessage(InvalidCvvFormatMessage);
+
+        RuleFor(p => p.ProviderType)
+            .Must(providerType => Enum.IsDefined(typeof(TokenProviderType), providerType))
+            .When(p => p.ProviderType.HasValue)
+            .WithMessage("The provided token provider type is invalid.");
     }
 }
