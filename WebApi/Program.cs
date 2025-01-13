@@ -1,10 +1,19 @@
 using RegisterCard.Application;
 using RegisterCard.Infrastructure;
 using RegisterCard.WebApi.Extensions.Middlewares;
+using RegisterCard.WebApi.Utils;
 using System.Net;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddScoped<ApiResponseFilter>();
+
+
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add(typeof(ApiResponseFilter));
+});
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
